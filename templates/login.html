@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Login | EsToDoList{% endblock %}
+
+{% block content %}
+    <form method="post" action="/login">
+        <label>Faça seu login de acesso</label>
+        {% if msgerro %}
+            <p>{{msgerro}}</p>
+        {% endif %}
+        <br>
+        <label>Email: </label>
+        <input type="email" name="email" placeholder="Digite seu e-mail..." required>
+        <br>
+        <label>Senha: </label>
+        <input type="password" name="senha" placeholder="Digite sua senha..." required>
+        <br><br>
+        <button type="submit">Acessar</button>
+    </form>
+{% endblock %}
