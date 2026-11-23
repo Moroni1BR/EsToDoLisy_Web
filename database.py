@@ -4,7 +4,7 @@ from mysql.connector import Error
 def conectar(): 
     try: # Tentar conexão
         conexao = mysql.connector.connect(
-            host="localhost",     # Endereço
+            host="localhost",     # Endereço 
             user="root",          # Usuário
             password="senai",     # Senha
             database="estodolist" # Database criado
@@ -26,7 +26,6 @@ def inserir_tarefa(nome_tarefa,descricao,categoria,data_prazo,prioridade):
     # Verifica se a conexão funcionou
     if conexao is None:
         return False
-
     try:
         # %s SQL Parametrizado para evitar SQL Injection
         sql = "INSERT INTO tarefa (nomeTarefa,descricao,categoria,dataPrazo,prioridade) VALUES (%s, %s, %s, %s, %s)"

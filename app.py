@@ -1,6 +1,8 @@
+from datetime import date
 from flask import Flask, render_template, request, session, redirect
 from database import consultar_tarefas
 
+CATEGORIAS = ["Escola", "Trabalho", "Projetos", "Pessoal", "Saúde", "Outros"]
 app = Flask(__name__)
 app.secret_key = "moroni"
 
@@ -52,7 +54,28 @@ def not_found(erro):
     return render_template("erro404.html")
 
 # --------------------------------------
-# Buscar tarefas no Banco
+# Criar tarefas no Banco
+@app.route("/adicionar", methods=["GET", "POST"])
+def adicionar():
+    if request.method == "GET":
+        return render_template("formularios.html", categorias=CATEGORIAS, dados={}, erros=[])
+
+    # POST: ler o que veio do formulário
+    nome_tarefa = request.form.get("nome_tarefa", "").strip
+    descricao = request.form.get("descricao", "").strip
+    categoria = request.form.get("categoria", "").strip
+    data_prazo = request.form.get("data_prazo", "").strip
+    prioridade = request.form.get("prioridade", "").strip
+
+    # Validar os Bancos
+    
+    # Gravar no Banco
+    if inserir_tarefa(nome_tarefa, descricao, categoria, data_prazo, prioridade):
+        flash("Tarefa adicionada com sucesso!")
+    else:
+        flazh("Não foi possível salvar. Confira a conexão com o banco")
+    return redirect("/")
+
 
 
 
