@@ -110,7 +110,7 @@ def adicionar(): # Adicionar tarefas
 
 # --------------------------------------
 # Concluir tarefa
-@app.route("/concluir/<int>idtarefa>", methods=["POST"])
+@app.route("/concluir/<int:idtarefa>", methods=["POST"])
 def concluir(idtarefa): # Concluir tarefa
     tarefa = buscar_tarefa(idtarefa)
     if tarefa is None or tarefa["status"] == "Concluída":
