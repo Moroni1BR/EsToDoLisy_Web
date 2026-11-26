@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <form action="/excluir/{{ tarefa.idtarefa }}" methods="post">  
+    <form action="/excluir/{{ tarefa.idtarefa }}" method="post"
+      class="max-w-sm mx-auto mt-10 bg-white rounded-xl shadow p-6 space-y-4">  
         <h2 class="text-xl font-bold">Excluir esta tarefa?</h2>
         <p>{{ tarefa.nome_tarefa }}</p>
         <button type="submit"
