@@ -121,6 +121,19 @@ def concluir(idtarefa): # Concluir tarefa
         flash("Não foi posível concluir a tarefa.")
     return redirect("/")
 
+# --------------------------------------
+# Excluir tarefa
+@app.rout("/excluir/<int:idtarefa>", methods=["GET", "POST"])
+def excluir(idtarefa):
+    tarefa = buscar_tarefa(idtarefa)
+    if tarefa is None:
+        flash("Tarefa não encontrada.")
+        return redirect("/")
+    if request.method == "GET":
+        return render_template("confirmar_exclusao.html", tarefa=tarefa)
+    apagar_tarefa(idtarefa)
+    flash("Tarefa excluida.")
+    return redirect("/")
 
 
 
