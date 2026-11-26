@@ -123,7 +123,7 @@ def concluir(idtarefa): # Concluir tarefa
 
 # --------------------------------------
 # Excluir tarefa
-@app.rout("/excluir/<int:idtarefa>", methods=["GET", "POST"])
+@app.route("/excluir/<int:idtarefa>", methods=["GET", "POST"])
 def excluir(idtarefa):
     tarefa = buscar_tarefa(idtarefa)
     if tarefa is None:
