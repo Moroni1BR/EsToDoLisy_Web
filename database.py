@@ -172,18 +172,16 @@ def buscar_tarefa(idtarefa):
     conexao, cursor = conectar()
     if conexao is None:
         return None
-
     try:
         sql = """
-            SELECT 
-            idTarefa AS idtarefa,
+            SELECT idTarefa AS idtarefa,
             dataPrazo AS data_prazo,
             nomeTarefa AS nome_tarefa,
             status,
             descricao,
             categoria,
             prioridade
-            FROM tarefa WHERE idTAREFA = %S
+            FROM tarefa WHERE idTarefa = %s
             """
         cursor.execute(sql, (idtarefa,))
         return cursor.fetchone() #Um dicionário, ou None se não existir
@@ -195,5 +193,5 @@ def buscar_tarefa(idtarefa):
     finally:
         cursor.close()
         conexao.close()
-        
+
 

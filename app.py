@@ -1,6 +1,6 @@
 from datetime import date
 from pathlib import Path
-from database import consultar_tarefas, inserir_tarefa
+from database import (consultar_tarefas, inserir_tarefa, buscar_tarefa, concluir_tarefa, apagar_tarefa)
 
 from flask import Flask, render_template, redirect, session, request, flash
 
