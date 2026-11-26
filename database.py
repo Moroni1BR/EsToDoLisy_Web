@@ -112,9 +112,7 @@ def concluir_tarefa(idtarefa):
 # ------------------------------------------------------
 # Essa função irá editar as informações da tarefa
 def alterar_tarefa(idtarefa,nome_tarefa,descricao,categoria,data_prazo,prioridade):
-
     conexao, cursor = conectar()
-
     if conexao is None:
         return False
 
@@ -139,6 +137,7 @@ def alterar_tarefa(idtarefa,nome_tarefa,descricao,categoria,data_prazo,prioridad
     except Error as erro:
         print(f"ERRO! Falha ao editar a tarefa: {erro}")
         return False # Retorna Falso em caso de erro
+    
     finally:
         cursor.close()
         conexao.close()
@@ -147,9 +146,7 @@ def alterar_tarefa(idtarefa,nome_tarefa,descricao,categoria,data_prazo,prioridad
 # ---------------------------
 # APAGAR TAREFA
 def apagar_tarefa(idtarefa):
-
     conexao, cursor = conectar()
-
     if conexao is None:
         return False
 
@@ -157,7 +154,6 @@ def apagar_tarefa(idtarefa):
         sql = "DELETE FROM tarefa WHERE idTarefa = %s"
 
         cursor.execute(sql,(idtarefa,))
-        
         conexao.commit() # Confirma a exclusão nos dados
 
         return True
@@ -165,7 +161,39 @@ def apagar_tarefa(idtarefa):
     except Error as erro:
         print(f"ERRO! Falha ao excluir a tarefa: {erro}")
         return False # Retorna Falso em caso de erro
+    
     finally:
         cursor.close()
         conexao.close()
+
+#-----------------------------------------------------------------------
+# Função para buscar uma tarefa
+def buscar_tarefa(idtarefa):
+    conexao, cursor = conectar()
+    if conexao is None:
+        return None
+
+    try:
+        sql = """
+            SELECT 
+            idTarefa AS idtarefa,
+            dataPrazo AS data_prazo,
+            nomeTarefa AS nome_tarefa,
+            status,
+            descricao,
+            categoria,
+            prioridade
+            FROM tarefa WHERE idTAREFA = %S
+            """
+        cursor.execute(sql, (idtarefa,))
+        return cursor.fetchone() #Um dicionário, ou None se não existir
+
+    except Error as erro:
+        print(f"ERRO! Falha ao buscar a tarefa: {erro}")
+        return None
+
+    finally:
+        cursor.close()
+        conexao.close()
+        
 
