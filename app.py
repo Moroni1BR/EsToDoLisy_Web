@@ -108,6 +108,19 @@ def adicionar(): # Adicionar tarefas
         flash("Não foi possível salvar. Confira a conexão com o banco")
     return redirect("/")
 
+# --------------------------------------
+# Concluir tarefa
+@app.route("/concluir/<int>idtarefa>", methods=["POST"])
+def concluir(idtarefa): # Concluir tarefa
+    tarefa = buscar_tarefa(idtarefa)
+    if tarefa is None or tarefa["status"] == "Concluída":
+        flash("Não há o que concluir nessa tarefa.")
+    elif concluir_tarefa(idtarefa):
+        flash("Tarefa concluída. Bom trabalho!")
+    else:
+        flash("Não foi posível concluir a tarefa.")
+    return redirect("/")
+
 
 
 
