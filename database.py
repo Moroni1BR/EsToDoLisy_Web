@@ -36,12 +36,13 @@ def inserir_tarefa(nome_tarefa,descricao,categoria,data_prazo,prioridade):
         # Retornar TRUE para função principal
         return True
     
-    except Error as erro:
-        print(f"ERRO! Falha ao inserir a tarefa: {erro}")
-        return False
-    finally:
-        cursor.close()
-        conexao.close()
+    except Error as erro: # Se der erro
+        print(f"ERRO! Falha ao inserir a tarefa: {erro}") # Imprime o erro
+        return False # Retorna Falso
+    
+    finally: # Independentemete de ocorrer um ou outro, ou nenhum --> Encerra o cursor e a conexão
+        cursor.close()  # Encerra o cursor
+        conexao.close() # Encerra a conexão
 
 # ------------------------------------------------------------
 # Retorna todas as tarefas cadastradas no Banco de Dados

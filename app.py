@@ -99,7 +99,7 @@ def adicionar(): # Adicionar tarefas
     erros = validar_tarefa(nome_tarefa, descricao, categoria, data_prazo, prioridade) # 
 
     if erros:
-        return render_template("formulario.html", categorias=CATEGORIAS, dados=request.form, erros=erros)
+        return render_template("formularios.html", categorias=CATEGORIAS, dados=request.form, erros=erros)
     
     # Gravar no Banco
     if inserir_tarefa(nome_tarefa, descricao, categoria, data_prazo, prioridade):
